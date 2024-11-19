@@ -30,52 +30,28 @@ word_transcriptions = [
     {"word": "photographic", "transcriptions": ["foʊ.tə.ˈɡræ.fɪk", "foʊ.ɾə.ˈɡræ.fɪk"]}
 ]
 
-
 # Initialize session state
 if "remaining_words" not in st.session_state:
     st.session_state.remaining_words = word_transcriptions.copy()
-if "current_word" not in st.session_state:
+    random.shuffle(st.session_state.remaining_words)
     st.session_state.current_word = None
-if "feedback" not in st.session_state:
-    st.session_state.feedback = ""
 
-# Title
-st.title("Phonetic Transcription Practice")
-
-# Show a word button
+# Button to show a random word
 if st.button("Show me a word"):
     if st.session_state.remaining_words:
-        # Select a random word
-        st.session_state.current_word = random.choice(st.session_state.remaining_words)
-        st.session_state.remaining_words.remove(st.session_state.current_word)
-        st.session_state.feedback = ""  # Reset feedback
+        st.session_state.current_word = st.session_state.remaining_words.pop()
     else:
-        st.warning("No more words left to practice!")
+        st.success("You've completed all words!")
+        st.stop()
 
-# Display the current word
+# Display word and input box if a word is available
 if st.session_state.current_word:
-    st.subheader(f"Word: {st.session_state.current_word['word']}")
-    user_input = st.text_input("Provide the phonetic transcription of this word (use [ ] brackets):")
+    st.write(f"Word: **{st.session_state.current_word['word']}**")
+    user_input = st.text_input("Provide the phonetic transcription (e.g., [ˈdɪ.plə.mæt]):")
 
-    # Check answer
     if st.button("Submit"):
-        # Normalize user input (remove brackets and whitespace)
-        normalized_input = user_input.strip().strip("[]")
         correct_transcriptions = st.session_state.current_word["transcriptions"]
-
-        if normalized_input in correct_transcriptions:
-            st.session_state.feedback = "✅ Correct!"
+        if user_input.strip("[]") in correct_transcriptions:
+            st.success("Correct!")
         else:
-            correct_transcriptions_str = ", ".join([f"[{trans}]" for trans in correct_transcriptions])
-            st.session_state.feedback = f"❌ Incorrect! Check this: {correct_transcriptions_str}"
-
-    # Display feedback
-    if st.session_state.feedback:
-        st.write(st.session_state.feedback)
-
-# Reset button for users who want to restart
-if st.button("Restart"):
-    st.session_state.remaining_words = word_transcriptions.copy()
-    st.session_state.current_word = None
-    st.session_state.feedback = ""
-    st.experimental_rerun()
+            st.error(f"Incorrect. Acceptable answers: {', '.join(correct_transcriptions)}")
