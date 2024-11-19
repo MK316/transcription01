@@ -35,11 +35,13 @@ if "remaining_words" not in st.session_state:
     st.session_state.remaining_words = word_transcriptions.copy()
     random.shuffle(st.session_state.remaining_words)
     st.session_state.current_word = None
+    st.session_state.feedback = ""
 
 # Button to show a random word
 if st.button("Show me a word"):
     if st.session_state.remaining_words:
         st.session_state.current_word = st.session_state.remaining_words.pop()
+        st.session_state.feedback = ""  # Reset feedback
     else:
         st.success("You've completed all words!")
         st.stop()
@@ -53,5 +55,11 @@ if st.session_state.current_word:
         correct_transcriptions = st.session_state.current_word["transcriptions"]
         if user_input.strip("[]") in correct_transcriptions:
             st.success("Correct!")
+            st.session_state.feedback = "Correct!"
         else:
             st.error(f"Incorrect. Acceptable answers: {', '.join(correct_transcriptions)}")
+            st.session_state.feedback = f"Incorrect. Acceptable answers: {', '.join(correct_transcriptions)}"
+
+    # Display feedback after submission
+    if st.session_state.feedback:
+        st.write(st.session_state.feedback)
