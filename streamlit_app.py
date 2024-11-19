@@ -13,7 +13,7 @@ word_transcriptions = [
     {"word": "multiple", "transcriptions": ["ˈmʌl.tə.pəl", "ˈmʌl.tɪ.pəl", "ˈmʌl.tɪ.pl̩"]},
     {"word": "regulate", "transcriptions": ["ˈrɛ.ɡjə.leɪt", "ˈrɛ.ɡjʊ.leɪt"]},
     {"word": "regular", "transcriptions": ["ˈrɛ.ɡjə.lər", "ˈrɛ.ɡjʊ.lər"]},
-    {"word": "copulate", "transcriptions": ["ˈkʰɑ.pjə.leɪt", ˈkʰɑ.pjʊ.leɪt"]},
+    {"word": "copulate", "transcriptions": ["ˈkʰɑ.pjə.leɪt", "ˈkʰɑ.pjʊ.leɪt"]},
     {"word": "copula", "transcriptions": ["ˈkʰɑ.pjə.lə", "ˈkʰɑ.pjʊ.lə"]},
     {"word": "circulate", "transcriptions": ["ˈsɜr.kjə.leɪt", "ˈsɜr.kjʊ.leɪt"]},
     {"word": "circular", "transcriptions": ["ˈsɜr.kjə.lər", "ˈsɜr.kjʊ.lər"]},
