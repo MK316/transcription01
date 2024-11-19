@@ -1,34 +1,35 @@
 import streamlit as st
 import random
 
-# Dataset of words and transcriptions
+# Dataset with multiple transcriptions for some words
 word_transcriptions = [
-    {"word": "diplomat", "transcription": "ˈdɪ.plə.mæt"},
-    {"word": "diplomacy", "transcription": "dɪ.ˈploʊ.mə.si"},
-    {"word": "diplomatic", "transcription": "ˌdɪ.plə.ˈmæ.tɪk"},
-    {"word": "monotone", "transcription": "ˈmɑ.nə.toʊn"},
-    {"word": "monotony", "transcription": "mə.ˈnɑ.tə.ni"},
-    {"word": "monotonic", "transcription": "mɑ.nə.ˈtɑ.nɪk"},
-    {"word": "multiply", "transcription": "ˈmʌl.tə.plaɪ"},
-    {"word": "multiple", "transcription": "ˈmʌl.tə.pəl"},
-    {"word": "regulate", "transcription": "ˈrɛ.ɡjə.leɪt"},
-    {"word": "regular", "transcription": "ˈrɛ.ɡjə.lər"},
-    {"word": "copulate", "transcription": "ˈkɑ.pjə.leɪt"},
-    {"word": "copula", "transcription": "ˈkɑ.pjə.lə"},
-    {"word": "circulate", "transcription": "ˈsɜr.kjə.leɪt"},
-    {"word": "circular", "transcription": "ˈsɜr.kjə.lər"},
-    {"word": "criticize", "transcription": "ˈkrɪ.tɪ.saɪz"},
-    {"word": "critical", "transcription": "ˈkrɪ.tɪ.kəl"},
-    {"word": "minimize", "transcription": "ˈmɪ.nɪ.maɪz"},
-    {"word": "minimal", "transcription": "ˈmɪ.nɪ.məl"},
-    {"word": "explain", "transcription": "ɪk.spleɪn"},
-    {"word": "explanation", "transcription": "ɛk.splə.ˈneɪ.ʃən"},
-    {"word": "exploit", "transcription": "ɪk.ˈsplɔɪt"},
-    {"word": "exploitation", "transcription": "ɛk.splɔɪ.ˈteɪ.ʃən"},
-    {"word": "photograph", "transcription": "ˈfoʊ.tə.ɡræf"},
-    {"word": "photography", "transcription": "fə.ˈtɑ.ɡrə.fi"},
-    {"word": "photographic", "transcription": "foʊ.tə.ˈɡræ.fɪk"}
+    {"word": "diplomat", "transcriptions": ["ˈdɪ.plə.mæt"]},
+    {"word": "diplomacy", "transcriptions": ["dɪ.ˈpl̥oʊ.mə.si"]},
+    {"word": "diplomatic", "transcriptions": ["ˌdɪ.plə.ˈmæ.tɪk", "ˌdɪ.plə.ˈmæ.ɾɪk"]},
+    {"word": "monotone", "transcriptions": ["ˈmɑ.nə.tʰoʊn"]},
+    {"word": "monotony", "transcriptions": ["mə.ˈnɑ.tə.ni"]},
+    {"word": "monotonic", "transcriptions": ["mɑ.nə.ˈtʰɑ.nɪk"]},
+    {"word": "multiply", "transcriptions": ["ˈmʌl.tə.pl̥aɪ", "ˈmʌl.tɪ.pl̥aɪ"]},
+    {"word": "multiple", "transcriptions": ["ˈmʌl.tə.pəl", "ˈmʌl.tɪ.pəl", "ˈmʌl.tɪ.pl̩"]},
+    {"word": "regulate", "transcriptions": ["ˈrɛ.ɡjə.leɪt", "ˈrɛ.ɡjʊ.leɪt"]},
+    {"word": "regular", "transcriptions": ["ˈrɛ.ɡjə.lər", "ˈrɛ.ɡjʊ.lər"]},
+    {"word": "copulate", "transcriptions": ["ˈkʰɑ.pjə.leɪt", ˈkʰɑ.pjʊ.leɪt"]},
+    {"word": "copula", "transcriptions": ["ˈkʰɑ.pjə.lə", "ˈkʰɑ.pjʊ.lə"]},
+    {"word": "circulate", "transcriptions": ["ˈsɜr.kjə.leɪt", "ˈsɜr.kjʊ.leɪt"]},
+    {"word": "circular", "transcriptions": ["ˈsɜr.kjə.lər", "ˈsɜr.kjʊ.lər"]},
+    {"word": "criticize", "transcriptions": ["ˈkɹ̥ɪ.tɪ.saɪz", "ˈkɹ̥ɪ.tə.saɪz", "ˈkɹ̥ɪ.ɾɪ.saɪz", "ˈkɹ̥ɪ.ɾə.saɪz"]},
+    {"word": "critical", "transcriptions": ["ˈkɹ̥ɪ.tɪ.kəl", "ˈkɹ̥ɪ.tə.kəl", "ˈkɹ̥ɪ.ɾə.kəl", "ˈkɹ̥ɪ.ɾə.kəl"]},
+    {"word": "minimize", "transcriptions": ["ˈmɪ.nɪ.maɪz", "ˈmɪ.nə.maɪz"]},
+    {"word": "minimal", "transcriptions": ["ˈmɪ.nɪ.məl", "ˈmɪ.nə.məl"]},
+    {"word": "explain", "transcriptions": ["ɪk.spleɪn", "ɛk.spleɪn"]},
+    {"word": "explanation", "transcriptions": ["ɪk.splə.ˈneɪ.ʃən", "ɛk.splə.ˈneɪ.ʃən"]},
+    {"word": "exploit", "transcriptions": ["ɪk.ˈsplɔɪt", "ɪk.ˈsplɔɪt"]},
+    {"word": "exploitation", "transcriptions": ["ɪk.splɔɪ.ˈtʰeɪ.ʃən", "ɛk.splɔɪ.ˈtʰeɪ.ʃən"]},
+    {"word": "photograph", "transcriptions": ["ˈfoʊ.tə.ɡræf", "ˈfoʊ.ɾə.ɡræf"]},
+    {"word": "photography", "transcriptions": ["fə.ˈtʰɑ.ɡrə.fi"]},
+    {"word": "photographic", "transcriptions": ["foʊ.tə.ˈɡræ.fɪk", "foʊ.ɾə.ˈɡræ.fɪk"]}
 ]
+
 
 # Initialize session state
 if "remaining_words" not in st.session_state:
@@ -58,11 +59,15 @@ if st.session_state.current_word:
 
     # Check answer
     if st.button("Submit"):
-        correct_transcription = f"[{st.session_state.current_word['transcription']}]"
-        if user_input.strip() == correct_transcription:
+        # Normalize user input (remove brackets and whitespace)
+        normalized_input = user_input.strip().strip("[]")
+        correct_transcriptions = st.session_state.current_word["transcriptions"]
+
+        if normalized_input in correct_transcriptions:
             st.session_state.feedback = "✅ Correct!"
         else:
-            st.session_state.feedback = f"❌ Incorrect! Check this: {correct_transcription}"
+            correct_transcriptions_str = ", ".join([f"[{trans}]" for trans in correct_transcriptions])
+            st.session_state.feedback = f"❌ Incorrect! Check this: {correct_transcriptions_str}"
 
     # Display feedback
     if st.session_state.feedback:
